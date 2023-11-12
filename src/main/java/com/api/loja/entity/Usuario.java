@@ -41,6 +41,9 @@ public class Usuario implements Serializable {
     private String email;
     @Column(name = "endereco", nullable = false, length = 254)
     private String endereco;
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

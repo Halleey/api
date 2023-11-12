@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Página de Gestão de Usuários">
-  <meta name="keywords" content="usuários, criar usuário">
-  <meta name="author" content="Hallyson">
-  <title>Cadastrar usuário</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de Gestão de Usuários">
+    <meta name="keywords" content="usuários, criar usuário">
+    <meta name="author" content="Hallyson">
+    <title>Cadastrar usuário</title>
 </head>
 <body>
 <h1>Criar Usuário</h1>
 
 <form id="createUserForm">
-  <label for="name">Nome de Usuário:</label>
-  <input type="text" id="name" required><br>
-  <label for="password">Senha:</label>
-  <input type="password" id="password" required><br>
-  <label for="email">Email:</label>
-  <input type="email" id="email" required><br>
-  <label for="endereco">Endereço:</label>
-  <input type="text" id="endereco" required><br>
-  <label for="departamento">Departamento:</label>
-  <select id="departamento">
-    <option value="TI">TI</option>
-    <option value="Gestao">Gestão</option>
-    <option value="RH">RH</option>
-  </select>
-  <button type="submit">Criar Usuário</button>
+    <label for="name">Nome de Usuário:</label>
+    <input type="text" id="name" required><br>
+    <label for="password">Senha:</label>
+    <input type="password" id="password" required><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required><br>
+    <label for="endereco">Endereço:</label>
+    <input type="text" id="endereco" required><br>
+    <label for="departamento">Departamento:</label>
+    <select id="departamento">
+        <option value="TI">TI</option>
+        <option value="Gestao">Gestão</option>
+        <option value="RH">RH</option>
+    </select>
+    <button type="submit">Criar Usuário</button>
 </form>
 <script>
-  document.getElementById("createUserForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+    document.getElementById("createUserForm").addEventListener("submit", function(event) {
+        event.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const password = document.getElementById("password").value;
-    const email = document.getElementById("email").value;
-    const endereco = document.getElementById("endereco").value;
-    const departamento = document.getElementById("departamento").value;
+        const name = document.getElementById("name").value;
+        const password = document.getElementById("password").value;
+        const email = document.getElementById("email").value;
+        const endereco = document.getElementById("endereco").value;
+        const departamento = document.getElementById("departamento").value;
 
-    const userData = {
-      name: name,
-      password: password,
-      email: email,
-      endereco: endereco,
-      departamento: departamento
-    };
+        const userData = {
+            name: name,
+            password: password,
+            email: email,
+            endereco: endereco,
+            departamento: departamento
+        };
 
-    fetch("/api/v1/usuarios", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userData)
-    })
+        fetch("/api/v1/usuarios", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        })
             .then(response => response.json())
             .then(data => {
-              document.getElementById("message").textContent = "Usuário criado com sucesso. ID: " + data.id;
+                document.getElementById("message").textContent = "Usuário criado com sucesso. ID: " + data.id;
             })
             .catch(error => {
-              document.getElementById("message").textContent = "Erro ao criar o usuário: " + error.message;
+                document.getElementById("message").textContent = "Erro ao criar o usuário: " + error.message;
             });
-  });
+    });
 </script>
 
 <div id="message"></div>

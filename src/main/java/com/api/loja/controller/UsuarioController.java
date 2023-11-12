@@ -20,7 +20,6 @@ public class UsuarioController {
         // Criar uma instância de Usuario e definir os valores dos campos
         usuario.setRole(Usuario.Role.ROLE_CLIENTE);
         Usuario user = usuarioService.salvar(usuario);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
