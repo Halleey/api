@@ -1,3 +1,3 @@
 # springbootapi
-Feita para gerenciar o cadastro de clientes, com o tempo irei colocando novas atualizações ]
+Aplicação para gerenciar conta de funcionários de uma empresa... Com  o tempo irei adicionando novas funcionalidades. 
 
