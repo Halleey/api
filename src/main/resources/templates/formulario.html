@@ -22,9 +22,9 @@
     <input type="text" id="endereco" required><br>
     <label for="departamento">Departamento:</label>
     <select id="departamento">
-        <option value="TI">TI</option>
-        <option value="Gestao">Gestão</option>
-        <option value="RH">RH</option>
+        <option value="1">TI</option>
+        <option value="2">RH</option>
+        <option value="3">Gestão</option>
     </select>
     <button type="submit">Criar Usuário</button>
 </form>
@@ -36,14 +36,16 @@
         const password = document.getElementById("password").value;
         const email = document.getElementById("email").value;
         const endereco = document.getElementById("endereco").value;
-        const departamento = document.getElementById("departamento").value;
+        const departamentoId = document.getElementById("departamento").value; // Alteração aqui
 
         const userData = {
             name: name,
             password: password,
             email: email,
             endereco: endereco,
-            departamento: departamento
+            departamento: {
+                id: departamentoId
+            }
         };
 
         fetch("/api/v1/usuarios", {

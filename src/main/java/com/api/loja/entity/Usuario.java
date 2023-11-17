@@ -42,7 +42,9 @@ public class Usuario implements Serializable {
     @Column(name = "endereco", nullable = false, length = 254)
     private String endereco;
 
-
+    @ManyToOne
+    @JoinColumn(name = "departamento_id")
+    Departamento departamento;
 
     @Override
     public boolean equals(Object o) {
