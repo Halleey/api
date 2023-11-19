@@ -1,5 +1,6 @@
 package com.api.loja.controller;
 
+import com.api.loja.dto.UsuarioCreateDto;
 import com.api.loja.entity.Usuario;
 import com.api.loja.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,6 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<Usuario> create(@RequestBody Usuario usuario ) {
         // Criar uma instância de Usuario e definir os valores dos campos
-        usuario.setRole(Usuario.Role.ROLE_CLIENTE);
         Usuario user = usuarioService.salvar(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
