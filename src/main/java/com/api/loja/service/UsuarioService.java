@@ -16,6 +16,7 @@ public class UsuarioService {
 
     @Transactional
     public Usuario salvar(Usuario usuario) {
+
         return  usuarioRepository.save(usuario);
     }
     @Transactional(readOnly = true)

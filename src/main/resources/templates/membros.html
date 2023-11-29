@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuários</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #user-table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #user-table th, #user-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        #user-table th {
+            background-color: #f2f2f2;
+        }
+
+        #user-table tr:hover {
+            background-color: #f5f5f5;
+            transition: background-color 0.3s;
+        }
+
+        .shine-effect {
+            transition: box-shadow 0.3s;
+        }
+
+        #user-table tr:hover .shine-effect {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+<table id="user-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Endereço</th>
+
+    </tr>
+    </thead>
+    <tbody id="user-list"></tbody>
+</table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const url = 'http://localhost:8080/api/v1/usuarios/all';
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(users => {
+                console.log(users);
+
+                // Exibir usuários na tabela
+                displayUsers(users);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    });
+
+    function displayUsers(users) {
+        const userList = document.getElementById('user-list');
+
+        users.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.endereco}</td>
+
+            `;
+            row.classList.add('shine-effect'); // Adiciona classe de efeito de brilho
+            userList.appendChild(row);
+        });
+    }
+</script>
+
+</body>
+</html>

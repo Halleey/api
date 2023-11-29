@@ -11,4 +11,11 @@ public class FormularioController {
     public String formulario() {
         return "formulario";
     }
+
+    @GetMapping("membros")
+    public  String membros() {
+        return "membros";
+
+    }
+
 }

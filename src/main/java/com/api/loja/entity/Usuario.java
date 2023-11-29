@@ -1,5 +1,6 @@
 package com.api.loja.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class Usuario implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "departamento_id")
+    @JsonIgnoreProperties("usuarios")
     Departamento departamento;
 
     @Override
