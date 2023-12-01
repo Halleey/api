@@ -6,15 +6,18 @@
 </head>
 <body>
 
-<h1>
-    Inserir dados do produto
-</h1>
+<h1>Inserir dados do produto</h1>
 
-<form id="CreateProduto">
+<form id="CreateProduto" enctype="multipart/form-data">
     <label for="name">Nome do produto</label>
     <input type="text" id="name" required><br>
+
     <label for="preco">Preço do produto</label>
-    <input type="number" id="preco">
+    <input type="number" id="preco" required><br>
+
+    <label for="imagem">Imagem do produto</label>
+    <input type="file" id="imagem" accept="image/*" required><br>
+
     <button type="submit">Enviar</button>
 </form>
 
@@ -24,6 +27,7 @@
 
         const name = document.getElementById("name").value;
         const price = parseFloat(document.getElementById("preco").value);
+        const imagem = document.getElementById("imagem").files[0];
 
         // Verifica se o preço é um número válido
         if (isNaN(price)) {
@@ -31,18 +35,31 @@
             return;
         }
 
-            const ProdutoData = {
-                name: name,
-                price: price
-            };
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("price", price);
+        formData.append("imagem", imagem);
+
         fetch("api/v1/produtos", {
-            method:"POST",
-            headers: {
-                "Content-Type": "application/json" // Indica que o corpo da requisição é JSON
-            },
-            body: JSON.stringify(ProdutoData) // Converte o objeto JavaScript para uma string JSON
+            method: "POST",
+            body: formData  // Use FormData para enviar dados multipart/form-data
         })
- });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Erro ao enviar a requisição");
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Manipule a resposta da API conforme necessário
+                console.log("Produto salvo com sucesso:", data);
+            })
+            .catch(error => {
+                // Trate erros da requisição
+                console.error("Erro na requisição:", error.message);
+            });
+    });
 </script>
+
 </body>
 </html>

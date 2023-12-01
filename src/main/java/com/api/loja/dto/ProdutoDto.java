@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,6 +16,9 @@ public class ProdutoDto {
     private Long id;
     private String name;
     private Double price;
+
+    public ProdutoDto(Long id, String name, BigDecimal price) {
+    }
 
     public  static ProdutoDto FromEntity(Produtos produtos) {
         return  new ProdutoDto(
@@ -26,7 +31,7 @@ public class ProdutoDto {
         Produtos produtos = new Produtos();
         produtos.setId(this.id);
         produtos.setName(this.name);
-        produtos.setPrice(this.price);
+        produtos.setPrice(BigDecimal.valueOf(this.price));
         return produtos;
     }
 }

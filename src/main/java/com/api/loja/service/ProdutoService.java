@@ -5,7 +5,9 @@ import com.api.loja.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -25,5 +27,14 @@ public class ProdutoService {
         return  produtoRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Produto não localizado")
         );
+    }
+    @Transactional
+    public Produtos salvarComImagem(Produtos produtos, MultipartFile imagem) {
+        try {
+            produtos.setImagem(imagem.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao converter a imagem para bytes: " + e.getMessage());
+        }
+        return produtoRepository.save(produtos);
     }
 }
