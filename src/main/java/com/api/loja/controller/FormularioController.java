@@ -15,7 +15,9 @@ public class FormularioController {
     @GetMapping("membros")
     public  String membros() {
         return "membros";
-
     }
-
+    @GetMapping("/insertProduct")
+    public  String produto() {
+        return  "produto";
+    }
 }

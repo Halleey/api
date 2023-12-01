@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inserir Produtos</title>
+</head>
+<body>
+
+<h1>
+    Inserir dados do produto
+</h1>
+
+<form id="CreateProduto">
+    <label for="name">Nome do produto</label>
+    <input type="text" id="name" required><br>
+    <label for="preco">Preço do produto</label>
+    <input type="number" id="preco">
+    <button type="submit">Enviar</button>
+</form>
+
+<script>
+    document.getElementById("CreateProduto").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const price = parseFloat(document.getElementById("preco").value);
+
+        // Verifica se o preço é um número válido
+        if (isNaN(price)) {
+            alert("Por favor, insira um valor numérico para o preço.");
+            return;
+        }
+
+            const ProdutoData = {
+                name: name,
+                price: price
+            };
+        fetch("api/v1/produtos", {
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json" // Indica que o corpo da requisição é JSON
+            },
+            body: JSON.stringify(ProdutoData) // Converte o objeto JavaScript para uma string JSON
+        })
+ });
+</script>
+</body>
+</html>

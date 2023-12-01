@@ -25,7 +25,6 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getById (@PathVariable Long id) {
 
