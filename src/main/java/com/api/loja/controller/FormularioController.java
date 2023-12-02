@@ -20,4 +20,8 @@ public class FormularioController {
     public  String produto() {
         return  "produto";
     }
+    @GetMapping("/home")
+    public  String home() {
+        return  "home";
+    }
 }

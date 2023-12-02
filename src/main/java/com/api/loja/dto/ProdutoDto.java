@@ -11,12 +11,12 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProdutoDto {
+public class  ProdutoDto {
 
     private Long id;
     private String name;
     private Double price;
-
+    private byte imagem;
     public ProdutoDto(Long id, String name, BigDecimal price) {
     }
 

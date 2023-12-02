@@ -4,6 +4,7 @@ import com.api.loja.dto.ProdutoDto;
 import com.api.loja.entity.Produtos;
 import com.api.loja.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -47,5 +48,18 @@ public class ProdutoController {
         List<ProdutoDto> produtos = produtoService.buscarProdutos().stream().map(ProdutoDto::FromEntity).toList();
         return ResponseEntity.ok().body(produtos);
     }
+    @GetMapping("/img/{id}")
+    //chama a foto armazenada na lista byte pelo id no banco
+    public  ResponseEntity<byte[]> getImgId(@PathVariable Long id) {
 
+    Produtos produtos = produtoService.getProdutoId(id);
+    byte[] imagem = produtos.getImagem();
+
+        //Classe para configurar os cabeçalho http
+        HttpHeaders headers = new HttpHeaders();
+        //Define o cabeçalho da resposta, no caso img_jpg
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        //retorna os bytes da imagem, o cabeçalho e um status ok para sucesso
+        return new ResponseEntity<>(imagem, headers, HttpStatus.OK);
+    }
 }
