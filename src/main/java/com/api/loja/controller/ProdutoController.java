@@ -38,7 +38,6 @@ public class ProdutoController {
         } catch (RuntimeException e) {
             // Em caso de erro, retorne uma resposta de erro interno do servidor
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-            // Poderia ser tratado de uma forma mais específica dependendo do caso, como retornar uma mensagem de erro personalizada.
         }
     }
 
