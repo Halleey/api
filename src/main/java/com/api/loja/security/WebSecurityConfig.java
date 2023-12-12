@@ -24,7 +24,7 @@ public class WebSecurityConfig {
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .permitAll().defaultSuccessUrl("/home",true)
+                        .permitAll().defaultSuccessUrl("/insertProduct",true)
                 )
                 .logout(LogoutConfigurer::permitAll);
 

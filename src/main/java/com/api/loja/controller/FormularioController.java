@@ -5,9 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping(name = "api/public")
 public class FormularioController {
 
     @GetMapping("/")
+    public  String home() {
+        return  "home";
+    }
+    
+    @GetMapping("/formulario")
     public String formulario() {
         return "formulario";
     }
@@ -20,12 +26,13 @@ public class FormularioController {
     public  String produto() {
         return  "produto";
     }
-    @GetMapping("/home")
-    public  String home() {
-        return  "home";
-    }
+
     @GetMapping("/login")
     public  String login() {
         return  "login";
+    }
+    @GetMapping("main")
+    public String Main() {
+        return "main";
     }
 }

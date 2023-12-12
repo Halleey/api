@@ -38,7 +38,7 @@ public class ProdutoController {
         } catch (RuntimeException e) {
             // Em caso de erro, retorne uma resposta de erro interno do servidor
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-            // Poderia ser tratado de uma forma mais específica dependendo do caso, como retornar uma mensagem de erro personalizada.
+
         }
     }
 
@@ -49,17 +49,23 @@ public class ProdutoController {
         return ResponseEntity.ok().body(produtos);
     }
     @GetMapping("/img/{id}")
-    //chama a foto armazenada na lista byte pelo id no banco
-    public  ResponseEntity<byte[]> getImgId(@PathVariable Long id) {
+    public ResponseEntity<byte[]> getImgId(@PathVariable String id) {
+        try {
+            Long productId = Long.parseLong(id);
+            Produtos produtos = produtoService.getProdutoId(productId);
+            byte[] imagem = produtos.getImagem();
 
-    Produtos produtos = produtoService.getProdutoId(id);
-    byte[] imagem = produtos.getImagem();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
 
-        //Classe para configurar os cabeçalho http
-        HttpHeaders headers = new HttpHeaders();
-        //Define o cabeçalho da resposta, no caso img_jpg
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        //retorna os bytes da imagem, o cabeçalho e um status ok para sucesso
-        return new ResponseEntity<>(imagem, headers, HttpStatus.OK);
+            return new ResponseEntity<>(imagem, headers, HttpStatus.OK);
+        } catch (NumberFormatException e) {
+            // Handle the case where ID is not a valid Long
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (Exception e) {
+            // Handle other exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
+
 }
