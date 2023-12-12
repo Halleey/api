@@ -20,46 +20,9 @@
 
     <button type="submit">Enviar</button>
 </form>
+<div id="mensagem"></div>
 
-<script>
-    document.getElementById("CreateProduto").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const name = document.getElementById("name").value;
-        const price = parseFloat(document.getElementById("preco").value);
-        const imagem = document.getElementById("imagem").files[0];
-
-        // Verifica se o preço é um número válido
-        if (isNaN(price)) {
-            alert("Por favor, insira um valor numérico para o preço.");
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append("name", name);
-        formData.append("price", price);
-        formData.append("imagem", imagem);
-
-        fetch("api/v1/produtos", {
-            method: "POST",
-            body: formData  // Use FormData para enviar dados multipart/form-data
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Erro ao enviar a requisição");
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Manipule a resposta da API conforme necessário
-                console.log("Produto salvo com sucesso:", data);
-            })
-            .catch(error => {
-                // Trate erros da requisição
-                console.error("Erro na requisição:", error.message);
-            });
-    });
-</script>
+<script src="/produto.js"></script>
 
 </body>
 </html>

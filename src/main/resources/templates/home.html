@@ -1,45 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+
+
+    </style>
 </head>
 <body>
 <h1>Home page</h1>
 
+<!-- Barra de Pesquisa -->
+<div>
+    <input type="text" id="searchInput" placeholder="Digite para pesquisar">
+    <button onclick="filterProducts()">Pesquisar</button>
+</div>
+
 <div id="productsContainer"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-<script>
-    // Função para carregar e exibir produtos
-    function loadProducts() {
-        fetch('/api/v1/produtos/allProducts')
-            .then(response => response.json())
-            .then(products => {
-                // Construir o HTML para os produtos
-                const productsHtml = products.map(product => `
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="/api/v1/produtos/img/${product.id}" alt="Product Image">
-                        <div class="card-body">
-                            <p class="card-text">${product.name}</p>
-                            <p>${product.price}</p>
-                        </div>
-                    </div>
-                `).join('');
-
-                // Atualizar o conteúdo da div com os produtos
-                document.getElementById('productsContainer').innerHTML = productsHtml;
-            })
-            .catch(error => {
-                console.error('Erro ao carregar produtos:', error.message);
-            });
-    }
-
-    // Chamar a função para carregar produtos quando a página carregar
-    document.addEventListener('DOMContentLoaded', loadProducts);
+<script src="/controle.js">
+    
 </script>
 </body>
 </html>
