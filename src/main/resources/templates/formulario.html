@@ -63,52 +63,9 @@
     <input type="email" id="email" required><br>
     <label for="endereco">Endereço:</label>
     <input type="text" id="endereco" required><br>
-    <label for="departamento">Departamento:</label>
-    <select id="departamento">
-        <option value="1">TI</option>
-        <option value="2">RH</option>
-        <option value="3">Gestão</option>
-        <option value="4">Designer</option>
-        <option value="5">Front_end</option>
-    </select>
     <button type="submit">Criar Usuário</button>
 </form>
-<script>
-    document.getElementById("createUserForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const name = document.getElementById("name").value;
-        const password = document.getElementById("password").value;
-        const email = document.getElementById("email").value;
-        const endereco = document.getElementById("endereco").value;
-        const departamentoId = document.getElementById("departamento").value; // Alteração aqui
-
-        const userData = {
-            name: name,
-            password: password,
-            email: email,
-            endereco: endereco,
-            departamento: {
-                id: departamentoId
-            }
-        };
-
-        fetch("/api/v1/usuarios", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(userData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("message").textContent = "Usuário criado com sucesso. ID: " + data.id;
-            })
-            .catch(error => {
-                document.getElementById("message").textContent = "Erro ao criar o usuário: " + error.message;
-            });
-    });
-</script>
+<script src="/cadastro.js"></script>
 
 <div id="message"></div>
 

@@ -1,6 +1,8 @@
 package com.api.loja.service;
 
+import com.api.loja.entity.CarroCompras;
 import com.api.loja.entity.Usuario;
+import com.api.loja.repository.CarrinhoRepository;
 import com.api.loja.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,11 +15,16 @@ import java.util.List;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final CarrinhoRepository carrinhoRepository;
 
     @Transactional
     public Usuario salvar(Usuario usuario) {
+        CarroCompras carrinho = new CarroCompras();
+        carrinhoRepository.save(carrinho);
 
-        return  usuarioRepository.save(usuario);
+        usuario.setCarrinho(carrinho);
+
+        return usuarioRepository.save(usuario);
     }
     @Transactional(readOnly = true)
     public Usuario buscarPorId(Long id) {

@@ -31,8 +31,4 @@ public class FormularioController {
     public  String login() {
         return  "login";
     }
-    @GetMapping("main")
-    public String Main() {
-        return "main";
-    }
 }

@@ -34,9 +34,8 @@ public class Usuario implements Serializable {
     private String endereco;
 
     @ManyToOne
-    @JoinColumn(name = "departamento_id")
-    @JsonIgnoreProperties("usuarios")
-    Departamento departamento;
+    @JoinColumn(name = "carrinho_id")
+    private CarroCompras carrinho;
 
     @Override
     public boolean equals(Object o) {

@@ -31,4 +31,8 @@ public class Produtos implements Serializable {
     @Lob
     @Column(name = "imagem", columnDefinition = "BLOB")
     private byte[] imagem;
+
+    @ManyToOne
+    @JoinColumn(name = "carrinho_id")
+    private  CarroCompras carrinho;
 }
