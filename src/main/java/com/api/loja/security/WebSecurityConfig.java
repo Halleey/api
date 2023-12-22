@@ -10,7 +10,6 @@
 //import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 //import org.springframework.security.web.SecurityFilterChain;
-//
 //@Configuration
 //@EnableWebSecurity
 //public class WebSecurityConfig {
@@ -18,9 +17,11 @@
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //        http
-//                .authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers("/").permitAll()
-//                        .anyRequest().authenticated()
+//                .authorizeHttpRequests((requests) -> {
+//                            requests.requestMatchers("/**").permitAll()
+//                                    .requestMatchers("api/v1/produtos/allProducts").permitAll()
+//                                    .anyRequest().authenticated();
+//                        }
 //                )
 //                .formLogin((form) -> form
 //                        .loginPage("/login")

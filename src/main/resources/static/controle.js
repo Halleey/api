@@ -1,4 +1,4 @@
-  // Função para carregar e exibir produtos
+
         function loadProducts() {
             fetch('/api/v1/produtos/allProducts')
                 .then(response => response.json())
@@ -25,10 +25,9 @@
                 });
         }
 
-        // Chamar a função para carregar produtos quando a página carregar
         document.addEventListener('DOMContentLoaded', loadProducts);
 
-        // Função para filtrar produtos com base na barra de pesquisa
+        // Filtro de produtos
         function filterProducts() {
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
 

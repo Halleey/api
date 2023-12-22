@@ -39,7 +39,6 @@ public class UsuarioController {
         UsuarioDto updatedUserDto = UsuarioDto.fromEntity(updatedUser); // Converte Entidade para DTO
         return ResponseEntity.ok().body(updatedUserDto);
     }
-
     @GetMapping("/all")
     public ResponseEntity<List<UsuarioDto>> getAll () {
         List<UsuarioDto> users = usuarioService.buscarPorTodos().stream().map(UsuarioDto::fromEntity).collect(Collectors.toList());

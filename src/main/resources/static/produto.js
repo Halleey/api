@@ -10,7 +10,6 @@ document.getElementById("CreateProduto").addEventListener("submit", function(eve
         alert("Por favor, insira um valor numérico para o preço.");
         return;
     }
-
     const formData = new FormData();
     formData.append("name", name);
     formData.append("price", price);
@@ -26,6 +25,7 @@ document.getElementById("CreateProduto").addEventListener("submit", function(eve
             }
             return response.json();
         })
+
         .then(data => {
             // Manipule a resposta da API conforme necessário
             console.log("Produto salvo com sucesso:", data);
@@ -36,6 +36,7 @@ document.getElementById("CreateProduto").addEventListener("submit", function(eve
             mensagemElement.style.color = "green"; //
             document.getElementById("CreateProduto").reset();
         })
+
         .catch(error => {
             // Caso de erros da requisição
             console.error("Erro na requisição:", error.message);

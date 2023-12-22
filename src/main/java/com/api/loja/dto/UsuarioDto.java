@@ -16,6 +16,7 @@ public class UsuarioDto {
     private String email;
     private String endereco;
 
+
     public static UsuarioDto fromEntity(Usuario usuario) {
         return new UsuarioDto(
                 usuario.getId(),
