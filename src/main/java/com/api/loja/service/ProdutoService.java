@@ -1,6 +1,7 @@
 package com.api.loja.service;
 
 import com.api.loja.entity.Produtos;
+import com.api.loja.exceptions.IdException;
 import com.api.loja.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ProdutoService {
     @Transactional(readOnly = true)
     public Produtos getProdutoId(Long id) {
         return  produtoRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Produto não localizado")
+                () -> new IdException(id)
         );
     }
     @Transactional

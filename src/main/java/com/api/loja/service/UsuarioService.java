@@ -1,6 +1,7 @@
 package com.api.loja.service;
 import com.api.loja.entity.CarroCompras;
 import com.api.loja.entity.Usuario;
+import com.api.loja.exceptions.UserExceptions;
 import com.api.loja.repository.CarrinhoRepository;
 import com.api.loja.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class UsuarioService {
     @Transactional(readOnly  = true)
     public Usuario buscarPorId(Long id) {
         return usuarioRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("User not found")
+                () -> new UserExceptions(id)
         );
     }
     @Transactional
@@ -36,6 +37,7 @@ public class UsuarioService {
         user.setPassword(password);
         return user;
     }
+    
     @Transactional(readOnly = true)
     public List<Usuario> buscarPorTodos() {
         return usuarioRepository.findAll();
